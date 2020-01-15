@@ -7,8 +7,14 @@ public class Galton{
     let capDiameter : CGFloat = 30.0
     let pinDiameter : CGFloat = 24.0
     let levels = 5
+    let centerX : CGFloat
+    let centerY : CGFloat
     
-    public init(){}
+    public init(){
+        self.centerX = (capDiameter*2)+(capDiameter*CGFloat(levels-1))
+        let topBall = (CGFloat(levels-1)*(capDiameter*2))+capDiameter
+        self.centerY = CGFloat(totalHeight) - topBall - capDiameter
+    }
     
     func drawUpperTriangleIn(scene: GaltonScene){
         drawUpperTriangle(scene: scene, levels: levels)
@@ -47,9 +53,8 @@ public class Galton{
     }
 
     func positionAt(level: Int, ball:Int) -> CGPoint{
-        let space = capDiameter*2
-        let x = (CGFloat(ball)*(space))+(capDiameter*CGFloat(level))
-        let y = (CGFloat(level)*(capDiameter*2))+capDiameter
+        let x = (CGFloat(ball-1)*(capDiameter*2))+(capDiameter*CGFloat(level)) + centerX/2 + capDiameter/2
+        let y = (CGFloat(level)*(capDiameter*2))+capDiameter + centerY
         return CGPoint(x:x, y:y)
     }
 }

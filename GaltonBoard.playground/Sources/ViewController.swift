@@ -4,7 +4,7 @@ import SpriteKit
 public class GaltonScene : SKScene {
     
     var galton : Galton
-    let wallColor = UIColor.blue
+    let wallColor = UIColor.brown
     
     init(galton: Galton) {
         self.galton = galton
@@ -23,7 +23,7 @@ public class GaltonScene : SKScene {
     
     public func addSpriteAtPosition(point: CGPoint, isDynamic: Bool, radius: CGFloat){
         let tile = SKShapeNode(circleOfRadius: radius);
-        tile.fillColor = isDynamic ? .black : wallColor
+        tile.fillColor = isDynamic ? .blue : wallColor
 
         let sprite = SKSpriteNode(texture: SKView().texture(from: tile))
         sprite.physicsBody = SKPhysicsBody(circleOfRadius: radius)

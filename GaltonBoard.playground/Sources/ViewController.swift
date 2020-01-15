@@ -45,7 +45,7 @@ public class ViewController : UIViewController {
 
         super.init(nibName: nil, bundle: nil)
         self.preferredContentSize = CGSize(width: self.galton.totalWidth, height: self.galton.totalHeight)
-        galton.drawUpperTriangleIn(scene: galtonScene)
+        galton.drawUpperTriangle(scene: galtonScene)
 
     }
     

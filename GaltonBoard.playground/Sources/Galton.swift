@@ -16,8 +16,10 @@ public class Galton{
         self.centerY = CGFloat(totalHeight) - topBall - capDiameter
     }
     
-    func drawUpperTriangleIn(scene: GaltonScene){
-        drawUpperTriangle(scene: scene, levels: levels)
+    func positionAt(level: Int, ball:Int) -> CGPoint{
+        let x = (CGFloat(ball-1)*(capDiameter*2))+(capDiameter*CGFloat(level)) + centerX/2 + capDiameter/2
+        let y = (CGFloat(level)*(capDiameter*2))+capDiameter + centerY
+        return CGPoint(x:x, y:y)
     }
     
     func restartDropIn(scene: GaltonScene){
@@ -35,7 +37,7 @@ public class Galton{
         })
 
     }
-
+  
     func dropRandomCapInScene(scene: GaltonScene){
         let offset = CGFloat.random(in: -3...3)
         var center = positionAt(level: levels-1, ball: 1)
@@ -43,7 +45,7 @@ public class Galton{
         scene.addSpriteAtPosition(point: center, color: .blue, isDynamic: true, radius: capDiameter/2)
     }
 
-    func drawUpperTriangle(scene: GaltonScene, levels: Int){
+    func drawUpperTriangle(scene: GaltonScene){
         for i in 0...levels-2{ //for each level i
             let ballsInLvel = levels-i
             for j in 1...ballsInLvel{ //for each ball
@@ -52,10 +54,6 @@ public class Galton{
         }
     }
 
-    func positionAt(level: Int, ball:Int) -> CGPoint{
-        let x = (CGFloat(ball-1)*(capDiameter*2))+(capDiameter*CGFloat(level)) + centerX/2 + capDiameter/2
-        let y = (CGFloat(level)*(capDiameter*2))+capDiameter + centerY
-        return CGPoint(x:x, y:y)
-    }
+
 }
 

@@ -11,13 +11,13 @@ public class Galton{
     let centerY : CGFloat
     
     public init(){
-        self.centerX = (capDiameter*2)+(capDiameter*CGFloat(levels-1))
-        let topBall = (CGFloat(levels-1)*(capDiameter*2))+capDiameter
+        self.centerX = (capDiameter*2)+(capDiameter*CGFloat(levels))
+        let topBall = (CGFloat(levels)*(capDiameter*2))+capDiameter
         self.centerY = CGFloat(totalHeight) - topBall - capDiameter
     }
     
     func positionAt(level: Int, ball:Int) -> CGPoint{
-        let x = (CGFloat(ball-1)*(capDiameter*2))+(capDiameter*CGFloat(level)) + centerX/2 + capDiameter/2
+        let x = (CGFloat(ball-1)*(capDiameter*2))+(capDiameter*CGFloat(level)) + centerX/2// + capDiameter/2
         let y = (CGFloat(level)*(capDiameter*2))+capDiameter + centerY
         return CGPoint(x:x, y:y)
     }
@@ -40,16 +40,18 @@ public class Galton{
   
     func dropRandomCapInScene(scene: GaltonScene){
         let offset = CGFloat.random(in: -3...3)
-        var center = positionAt(level: levels-1, ball: 1)
-        center.x = center.x+offset
+        var center = positionAt(level: levels, ball: 1)
+        center.x = center.x+offset-capDiameter
         scene.addSpriteAtPosition(point: center, color: .blue, isDynamic: true, radius: capDiameter/2)
     }
 
     func drawUpperTriangle(scene: GaltonScene){
-        for i in 0...levels-2{ //for each level i
-            let ballsInLvel = levels-i
-            for j in 1...ballsInLvel{ //for each ball
-                scene.addSpriteAtPosition(point: positionAt(level: i, ball: j), color: .black, isDynamic: false, radius: pinDiameter/2)
+        for i in 1...levels{ //for each level i
+            let ballsInLvel = levels-i+1
+            for j in 0...ballsInLvel{ //for each ball
+                var point = positionAt(level: i, ball: j)
+                point.y = point.y-capDiameter*2
+                scene.addSpriteAtPosition(point: point, color: .black, isDynamic: false, radius: pinDiameter/2)
             }
         }
     }
@@ -59,9 +61,9 @@ public class Galton{
         let wallHeight = centerY - capDiameter
         let wallWidth : CGFloat = 15.0
         
-        for i in 1...levels {
+        for i in 0...levels {
             let horizontalPosition = positionAt(level: 0, ball: i)
-            scene.addWall(width: wallWidth, height: wallHeight, position: horizontalPosition.x)
+            scene.addWall(width: wallWidth, height: wallHeight, position: horizontalPosition.x+capDiameter)
         }
         scene.addFloorWithWidth(width:CGFloat(totalWidth), height:wallWidth)
 

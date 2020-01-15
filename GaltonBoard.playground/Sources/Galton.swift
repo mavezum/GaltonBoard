@@ -42,7 +42,7 @@ public class Galton{
         let offset = CGFloat.random(in: -3...3)
         var center = positionAt(level: levels, ball: 1)
         center.x = center.x+offset-capDiameter
-        scene.addSpriteAtPosition(point: center, color: .blue, isDynamic: true, radius: capDiameter/2)
+        scene.addSpriteAtPosition(point: center, isDynamic: true, radius: capDiameter/2)
     }
 
     func drawUpperTriangle(scene: GaltonScene){
@@ -51,7 +51,7 @@ public class Galton{
             for j in 0...ballsInLvel{ //for each ball
                 var point = positionAt(level: i, ball: j)
                 point.y = point.y-capDiameter*2
-                scene.addSpriteAtPosition(point: point, color: .black, isDynamic: false, radius: pinDiameter/2)
+                scene.addSpriteAtPosition(point: point, isDynamic: false, radius: pinDiameter/2)
             }
         }
     }

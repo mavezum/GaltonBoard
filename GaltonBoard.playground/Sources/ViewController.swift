@@ -4,6 +4,7 @@ import SpriteKit
 public class GaltonScene : SKScene {
     
     var galton : Galton
+    let wallColor = UIColor.blue
     
     init(galton: Galton) {
         self.galton = galton
@@ -20,9 +21,9 @@ public class GaltonScene : SKScene {
         galton.restartDropIn(scene: self);
     }
     
-    public func addSpriteAtPosition(point: CGPoint, color: UIColor, isDynamic: Bool, radius: CGFloat){
+    public func addSpriteAtPosition(point: CGPoint, isDynamic: Bool, radius: CGFloat){
         let tile = SKShapeNode(circleOfRadius: radius);
-        tile.fillColor = color
+        tile.fillColor = isDynamic ? .black : wallColor
 
         let sprite = SKSpriteNode(texture: SKView().texture(from: tile))
         sprite.physicsBody = SKPhysicsBody(circleOfRadius: radius)
@@ -36,7 +37,7 @@ public class GaltonScene : SKScene {
         let yPosition : CGFloat = 5;
         
         let node = SKShapeNode(rect: CGRect(x: 0, y: 0, width: width, height: height));
-        node.fillColor = .black
+        node.fillColor = wallColor
         let sprite = SKSpriteNode(texture: SKView().texture(from: node))
         sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: height), center: CGPoint(x: -1, y: -1))
         sprite.physicsBody?.isDynamic = false
@@ -47,7 +48,7 @@ public class GaltonScene : SKScene {
     public func addFloorWithWidth(width:CGFloat, height:CGFloat){
         let yPosition : CGFloat = 5;
         let node = SKShapeNode(rect: CGRect(x: 0, y: 0, width: width, height: height));
-        node.fillColor = .black
+        node.fillColor = wallColor
         let sprite = SKSpriteNode(texture: SKView().texture(from: node))
         sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: height), center: CGPoint(x: -1, y: -1))
         sprite.physicsBody?.isDynamic = false

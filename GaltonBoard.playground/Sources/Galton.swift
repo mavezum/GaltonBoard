@@ -4,12 +4,13 @@ import SpriteKit
 public class Galton{
     let totalWidth = 450 //450
     let totalHeight = 800 //800
-    let capDiameter : CGFloat = 20.0
-    let pinDiameter : CGFloat = 15.0
-    let levels = 7
+    let capDiameter : CGFloat = 18.0
+    let pinDiameter : CGFloat = 10.0
+    let levels = 11
     let centerX : CGFloat
     let centerY : CGFloat
-    
+    let wallWidth : CGFloat = 7.0
+
     public init(){
         self.centerX = (capDiameter*2)+(capDiameter*CGFloat(levels))
         let topBall = (CGFloat(levels)*(capDiameter*2))+capDiameter
@@ -23,7 +24,7 @@ public class Galton{
     }
     
     func restartDropIn(scene: GaltonScene){
-        var numberCaps = Int.random(in: 2...10)
+        var numberCaps = 5//Int.random(in: 2...10)
        // print("Dropping \(numberCaps) caps")
         dropRandomCapInScene(scene: scene)
         numberCaps = numberCaps-1
@@ -58,8 +59,7 @@ public class Galton{
     
     func drawLowerSticksAndFloorInScene(scene: GaltonScene){
         //position at level 0 ball 1..5 vai me dar a posicao das ultimas bolas
-        let wallHeight = centerY - capDiameter
-        let wallWidth : CGFloat = 15.0
+        let wallHeight = centerY - capDiameter*2
         
         for i in 0...levels {
             let horizontalPosition = positionAt(level: 0, ball: i)

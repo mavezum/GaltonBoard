@@ -23,8 +23,9 @@ public class GaltonScene : SKScene {
     
     public func addSpriteAtPosition(point: CGPoint, isDynamic: Bool, radius: CGFloat){
         let tile = SKShapeNode(circleOfRadius: radius);
-        tile.fillColor = isDynamic ? .blue : wallColor
-
+        let randomBlue = UIColor.init(red: 0.0, green: 0.0, blue: 1.0, alpha: CGFloat(Float.random(in: 0.3...1)))
+        tile.fillColor = isDynamic ? randomBlue : wallColor
+        
         let sprite = SKSpriteNode(texture: SKView().texture(from: tile))
         sprite.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         sprite.physicsBody?.isDynamic = isDynamic;

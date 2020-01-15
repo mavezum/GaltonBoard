@@ -4,9 +4,9 @@ import SpriteKit
 public class Galton{
     let totalWidth = 450 //450
     let totalHeight = 800 //800
-    let capDiameter : CGFloat = 30.0
-    let pinDiameter : CGFloat = 24.0
-    let levels = 5
+    let capDiameter : CGFloat = 20.0
+    let pinDiameter : CGFloat = 15.0
+    let levels = 7
     let centerX : CGFloat
     let centerY : CGFloat
     
@@ -24,7 +24,7 @@ public class Galton{
     
     func restartDropIn(scene: GaltonScene){
         var numberCaps = Int.random(in: 2...10)
-        print("Dropping \(numberCaps) caps")
+       // print("Dropping \(numberCaps) caps")
         dropRandomCapInScene(scene: scene)
         numberCaps = numberCaps-1
 
@@ -46,7 +46,7 @@ public class Galton{
     }
 
     func drawUpperTriangle(scene: GaltonScene){
-        for i in 1...levels{ //for each level i
+        for i in 1...levels-1{ //for each level i
             let ballsInLvel = levels-i+1
             for j in 0...ballsInLvel{ //for each ball
                 var point = positionAt(level: i, ball: j)

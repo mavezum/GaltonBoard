@@ -53,6 +53,19 @@ public class Galton{
             }
         }
     }
+    
+    func drawLowerSticksAndFloorInScene(scene: GaltonScene){
+        //position at level 0 ball 1..5 vai me dar a posicao das ultimas bolas
+        let wallHeight = centerY - capDiameter
+        let wallWidth : CGFloat = 15.0
+        
+        for i in 1...levels {
+            let horizontalPosition = positionAt(level: 0, ball: i)
+            scene.addWall(width: wallWidth, height: wallHeight, position: horizontalPosition.x)
+        }
+        scene.addFloorWithWidth(width:CGFloat(totalWidth), height:wallWidth)
+
+    }
 
 
 }

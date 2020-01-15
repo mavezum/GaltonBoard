@@ -23,15 +23,38 @@ public class GaltonScene : SKScene {
     public func addSpriteAtPosition(point: CGPoint, color: UIColor, isDynamic: Bool, radius: CGFloat){
         let tile = SKShapeNode(circleOfRadius: radius);
         tile.fillColor = color
-        let shapeTexture = SKView().texture(from: tile)
 
-        let sprite = SKSpriteNode(texture: shapeTexture)
+        let sprite = SKSpriteNode(texture: SKView().texture(from: tile))
         sprite.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         sprite.physicsBody?.isDynamic = isDynamic;
         sprite.physicsBody?.mass = 1
         sprite.position = point
         self.addChild(sprite)
     }
+    
+    public func addWall(width: CGFloat, height: CGFloat, position: CGFloat){
+        let yPosition : CGFloat = 5;
+        
+        let node = SKShapeNode(rect: CGRect(x: 0, y: 0, width: width, height: height));
+        node.fillColor = .black
+        let sprite = SKSpriteNode(texture: SKView().texture(from: node))
+        sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: height), center: CGPoint(x: -1, y: -1))
+        sprite.physicsBody?.isDynamic = false
+        sprite.position = CGPoint(x:position, y: yPosition+(height/2))
+        self.addChild(sprite)
+    }
+    
+    public func addFloorWithWidth(width:CGFloat, height:CGFloat){
+        let yPosition : CGFloat = 5;
+        let node = SKShapeNode(rect: CGRect(x: 0, y: 0, width: width, height: height));
+        node.fillColor = .black
+        let sprite = SKSpriteNode(texture: SKView().texture(from: node))
+        sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: height), center: CGPoint(x: -1, y: -1))
+        sprite.physicsBody?.isDynamic = false
+        sprite.position = CGPoint(x:5+width/2, y: yPosition)
+        self.addChild(sprite)
+    }
+
 }
 
 public class ViewController : UIViewController {
@@ -46,6 +69,7 @@ public class ViewController : UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.preferredContentSize = CGSize(width: self.galton.totalWidth, height: self.galton.totalHeight)
         galton.drawUpperTriangle(scene: galtonScene)
+        galton.drawLowerSticksAndFloorInScene(scene: galtonScene)
 
     }
     

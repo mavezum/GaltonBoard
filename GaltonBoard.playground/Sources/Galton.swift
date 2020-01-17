@@ -12,8 +12,7 @@ public class Galton{
     let wallWidth : CGFloat = 7.0    
     
     public init(){
-        let firstPart = CGFloat(totalWidth) - capDiameter
-        self.centerX = firstPart - 2*capDiameter*CGFloat(levels+1)
+        self.centerX = CGFloat(totalWidth) - capDiameter*(2*CGFloat(levels)+3)
         let topBall = (CGFloat(levels)*(capDiameter*2))+capDiameter
         self.centerY = CGFloat(totalHeight) - topBall - capDiameter
     }
